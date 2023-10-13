@@ -1,5 +1,5 @@
-export type Handler<T, R = T> = (message: T) => R | Promise<R>;
-export type When<T> = Handler<T, boolean>;
+export type Handler<MessageType, ResultType = MessageType> = (message: MessageType) => ResultType | Promise<ResultType>;
+export type When<MessageType> = Handler<MessageType, boolean>;
 declare const defaultOptions: {
     breakOnFirst: boolean;
 };
