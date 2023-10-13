@@ -4,39 +4,36 @@
 // No BS TS #18 - Conditional Types in Typescript
 // https://www.youtube.com/watch?v=jdzLpEnRAqg&list=PLNqp92_EXZBJYFrpEzdO2EapvU0GOJ09n&index=21
 
-export type HandlerType<T> = (
-  message: T
-  //   options: {
-  //     next: () => void;
-  //     stop: () => void;
-  //   }
-  //   next: () => void
-) => undefined | unknown | Promise<undefined | unknown>;
+export type Handler<T, R = T> = (message: T) => R | Promise<R>;
+
+export type When<T> = Handler<T, boolean>;
 
 const defaultOptions = {
   breakOnFirst: true, // or continue all
 };
 
-export function createMessageHandler<T>(options?: typeof defaultOptions) {
-  const subscribers = new Set<HandlerType<T>>();
+export function createMessageHandler<T, R = T>(
+  options?: typeof defaultOptions
+) {
+  const subscribers = new Set<[When<T>, Handler<T, R>]>();
   const opts = Object.assign({}, defaultOptions, options);
 
   return {
-    subscribe(cb: HandlerType<T>): () => void {
-      subscribers.add(cb);
+    subscribe(when: When<T>, cb: Handler<T, R>): () => void {
+      const entry: [When<T>, Handler<T, R>] = [when, cb];
+      subscribers.add(entry);
       return () => {
-        subscribers.delete(cb);
+        subscribers.delete(entry);
       };
     },
 
-    async publish(message: T): Promise<undefined | unknown> {
-      let res: unknown = undefined;
-      for (const handler of Array.from(subscribers)) {
-        const current = await handler(message);
-        if (current === undefined) {
+    async handle(message: T): Promise<R | undefined> {
+      let res: R | undefined = undefined;
+      for (const [when, handler] of Array.from(subscribers)) {
+        if (!(await when(message))) {
           continue;
         }
-        res = current;
+        res = await handler(message);
         if (opts.breakOnFirst) {
           break;
         }
