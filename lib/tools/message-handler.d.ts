@@ -2,7 +2,7 @@ export type HandlerType<T> = (message: T) => undefined | unknown | Promise<undef
 declare const defaultOptions: {
     breakOnFirst: boolean;
 };
-export declare function createMessageHandler<T>(options: typeof defaultOptions): {
+export declare function createMessageHandler<T>(options?: typeof defaultOptions): {
     subscribe(cb: HandlerType<T>): () => void;
     publish(message: T): Promise<undefined | unknown>;
     clearAll(): void;

@@ -17,7 +17,7 @@ const defaultOptions = {
   breakOnFirst: true, // or continue all
 };
 
-export function createMessageHandler<T>(options: typeof defaultOptions) {
+export function createMessageHandler<T>(options?: typeof defaultOptions) {
   const subscribers = new Set<HandlerType<T>>();
   const opts = Object.assign({}, defaultOptions, options);
 
