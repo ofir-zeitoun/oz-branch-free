@@ -3,7 +3,13 @@ import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [dts({ include: ["src"], insertTypesEntry: true })],
+  plugins: [
+    dts({
+      include: ["src"],
+      insertTypesEntry: true,
+      exclude: ["src/**/*.spec.*"],
+    }),
+  ],
   build: {
     lib: {
       entry: "src/index.ts",
