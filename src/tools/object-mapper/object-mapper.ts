@@ -7,8 +7,8 @@ export const objectMapper = <T extends {}, TDefault>(
   defaultValue: TDefault
 ) => {
   return new Proxy<ObjectMapper<T, TDefault>>(obj, {
-    get(target, prop) {
-      return prop in target ? (target as any)[prop] : defaultValue;
+    get(target, prop: string) {
+      return prop in target ? target[prop] : defaultValue;
     },
   });
 };

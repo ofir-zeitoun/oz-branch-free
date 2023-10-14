@@ -1,7 +1,7 @@
 type WhenPredicate<T> = (value: T) => boolean;
 type CaseHandler<T, ResultType> = (value: T) => ResultType;
 
-type SwitcherBuilder<T, ResultType = T> = {
+export type SwitcherBuilder<T, ResultType = T> = {
   when: (whenPredicate: WhenPredicate<T>) => SwitcherWhen<T, ResultType>;
   default: (
     handler: CaseHandler<T, ResultType>

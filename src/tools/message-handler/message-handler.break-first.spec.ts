@@ -8,7 +8,7 @@ describe("message-handler - break on first", () => {
   let unsubscribe2: () => void;
 
   const toUpperCaseFn = jest.fn((str: string) => str.toUpperCase());
-  const whenAtLeast3Chars = jest.fn((str: string) => str.length > 3);
+  const whenAtLeast3Chars = jest.fn((str: string) => str.length >= 3);
 
   const toLowerCaseFn = jest.fn((str: string) => str.toLowerCase());
   const whenStartsWithLetterA = jest.fn((str: string) =>
