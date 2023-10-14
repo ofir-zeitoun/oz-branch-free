@@ -2,7 +2,42 @@
 
 Library with alternatives to hard coded switch-case and if-else blocks
 
+[`createMessageHandler`](#createmessagehandler)
+
 [`objectMapper`](#objectmapper)
+
+### createMessageHandler
+
+`createMessageHandler` creates a handler so any subscriber can decide if it can and should handle the message arriving and return the correct value.
+
+```typescript
+import { createMessageHandler } from "oz-branch-free";
+
+const handler = createMessageHandler<string>();
+
+const unsubsribeTooShort = handler.subscribe(
+  (str) => str.length < 4,
+  (str) => `'${str}' is too short`
+);
+
+const unsubsribeTooLong = handler.subscribe(
+  (str) => str.length > 9,
+  (str) => `'${str}' is too long`
+);
+
+const resShort = handler.handle("abc");
+console.log(resShort); // output: 'abc' is too short
+
+const resLong = handler.handle("1234567890");
+console.log(resLong); // output: '1234567890' is too short
+
+unsubsribeTooShort();
+
+const resShortUnSubscribe = handler.handle("abc");
+console.log(resShortUnSubscribe); // output: undefined
+```
+
+Each subsribtion can be removed.
 
 ### objectMapper
 
