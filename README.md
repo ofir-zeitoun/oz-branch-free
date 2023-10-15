@@ -8,7 +8,7 @@ Library with alternatives to hard coded switch-case and if-else blocks
 
 ### createMessageHandler
 
-`createMessageHandler` creates a handler so any subscriber can decide if it can and should handle the message arriving and return the correct value.
+`createMessageHandler` creates a handler so any subscriber can decide if it can and should handle the message arriving and return the a value accordingly.
 
 ```typescript
 import { createMessageHandler } from "oz-branch-free";
