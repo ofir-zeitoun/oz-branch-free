@@ -118,4 +118,31 @@ describe("switcher", () => {
     expect(defaultFn).toBeCalledWith(input);
     expect(res).toBe("default: 123");
   });
+
+  test("Should accept value for when and result", () => {
+    const input = "123";
+
+    const switchCase = switcher.when("123").then("OK");
+
+    const res = switchCase.execute(input);
+    expect(res).toBe("OK");
+  });
+
+  test("Should accept string or undefined", () => {
+    const input = "123";
+    const switchCase = switcher.when("Not 123").then("OK");
+    const res = switchCase.execute(input);
+    // @ts-expect-error
+    expect(() => res.toLowerCase()).toThrow();
+  });
+
+  test("Should not have undefind value after default", () => {
+    const input = "123";
+
+    const switchCase = switcher.default("OK");
+
+    const res = switchCase.execute(input);
+
+    expect(res.toLowerCase()).toBe("ok");
+  });
 });
