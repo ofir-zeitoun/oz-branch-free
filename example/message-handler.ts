@@ -16,7 +16,7 @@ const resShort = handler.handle("abc");
 console.log(resShort); // output: 'abc' is too short
 
 const resLong = handler.handle("1234567890");
-console.log(resLong); // output: 'abc' is too short
+console.log(resLong); // output: 'abc' is too long
 
 unsubsribeTooShort();
 
