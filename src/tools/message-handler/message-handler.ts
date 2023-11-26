@@ -88,7 +88,7 @@ export function createMessageHandler<
   R = T,
   Actionable extends
     | BreakOnFirstActionable
-    | ContinueAllActionable = BreakOnFirstActionable
+    | ContinueAllActionable = ContinueAllActionable
 >(options: ContinueAll): MessageHandler<T, R, ContinueAllActionable>;
 export function createMessageHandler<
   T,
