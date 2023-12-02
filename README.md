@@ -6,6 +6,8 @@ Library with alternatives to hard coded switch-case and if-else blocks
 
 [`objectMapper`](#objectmapper)
 
+[`buildSwitch`](#buildSwitch)
+
 ### createMessageHandler
 
 `createMessageHandler` creates a handler so any subscriber can decide if it can and should handle the message arriving and return the a value accordingly.
@@ -104,3 +106,33 @@ mapper.d; // returns a string: 'Some default'
 mapper.anyValidPropName; // returns a string: 'Some default'
 mapper["any-prop-name"]; // returns a string: 'Some default'
 ```
+
+### buildSwitch
+
+`buildSwitch` is an alternative for enriched [switch-case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) with more options to compare and to handle.
+
+`buildSwitcher` has an input and output types.
+You can use a value or a function to when / then statements.
+
+After `when` must come `then`.<BR>
+After `default`, `execute` is the only option.
+
+```typescript
+// converts grades numbers to letters
+// order is important
+const grades = buildSwitch<number, string>()
+  .when((g) => g > 100 || g < 0)
+  .then((g) => {
+    throw new Error(`invalid grade ${g}`);
+  })
+  .when(100).then("Ace") // special case :-)
+  .when((g) => g >= 90).then("A")
+  .when((g) => g >= 80).then("B")
+  .when((g) => g >= 70).then("C")
+  .when((g) => g >= 60).then("D")
+  .default("F");
+
+const grade = grades.execute(95) // "A"
+```
+
+![switcher](/assets/images/switcher.gif)
