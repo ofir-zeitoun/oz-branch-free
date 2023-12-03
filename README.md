@@ -49,10 +49,10 @@ Constructor options:
 If `breakOnFirst` is `true` (default), the message handler stops once it find a match. The callback has action `next()` to override this behavior.
 
 Otherwise (`breakOnFirest` is `false`), the message handler continue for all subscribers. The callback has action `stop()` to override this behavior.
-![action can overide behavior](/assets/images/message-handler-continue-all.jpeg)
+![action can overide behavior](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/message-handler-continue-all.jpeg?raw=true)
 
 The next code shows that even if we init the message handler to run all (`breakOnFirst` is `false`), we can still stop it at the handler.
-![action can overide behavior](/assets/images/message-handler-break-on-first.jpeg)
+![action can overide behavior](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/message-handler-break-on-first.jpeg?raw=true)
 
 ```typescript
 const handler = createMessageHandler<string>({ breakOnFirst: false });
@@ -89,11 +89,11 @@ const mapper = objectMapper(
 ```
 
 Now you have intelicense with types for existing properties:
-![object-mapper with types](/assets/images/object-mapper.jpeg)
+![object-mapper with types](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/object-mapper.jpeg)?raw=true
 
 as well as for non existing properties:
 
-![object-mapper with default type](/assets/images/object-mapper-default.jpeg)
+![object-mapper with default type](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/object-mapper-default.jpeg?raw=true)
 
 ```typescript
 mapper.a; // returns a number: 1
@@ -135,4 +135,4 @@ const grades = buildSwitch<number, string>()
 const grade = grades.execute(95) // "A"
 ```
 
-![switcher](/assets/images/switcher.gif)
+![switcher](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/switcher.gif?raw=true)
