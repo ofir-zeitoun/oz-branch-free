@@ -17,12 +17,12 @@ import { createMessageHandler } from "oz-branch-free";
 
 const handler = createMessageHandler<string>();
 
-const unsubsribeTooShort = handler.subscribe(
+const unsubscribeTooShort = handler.subscribe(
   (str: string) => str.length < 4,
   (str: string) => `'${str}' is too short`
 );
 
-const unsubsribeTooLong = handler.subscribe(
+const unsubscribeTooLong = handler.subscribe(
   (str: string) => str.length > 9,
   (str: string) => `'${str}' is too long`
 );
@@ -33,19 +33,22 @@ console.log(resShort); // output: 'abc' is too short
 const resLong = await handler.handle("1234567890");
 console.log(resLong); // output: '1234567890' is too long
 
-unsubsribeTooShort();
+unsubscribeTooShort();
 
 const resShortUnSubscribe = await handler.handle("abc");
 console.log(resShortUnSubscribe); // output: undefined
 ```
 
-Each subsribtion can be removed.
-
+Each subscription can be removed.
 
 Constructor options:
+
 ```typescript
-{ breakOnFirst: boolean }
+{
+  breakOnFirst: boolean;
+}
 ```
+
 If `breakOnFirst` is `true` (default), the message handler stops once it find a match. The callback has action `next()` to override this behavior.
 
 Otherwise (`breakOnFirest` is `false`), the message handler continue for all subscribers. The callback has action `stop()` to override this behavior.
@@ -57,17 +60,23 @@ The next code shows that even if we init the message handler to run all (`breakO
 ```typescript
 const handler = createMessageHandler<string>({ breakOnFirst: false });
 
-handler.subscribe((str: string) => str.length > 3, (str: string, action: ContinueAllActionable)=> {
-  action.stop();
-  return `Longer: ${str.length}`;
-});
-handler.subscribe((str: string) => str.length > 3, (str: string)=> {
-  return "This will not run";
-});
+handler.subscribe(
+  (str: string) => str.length > 3,
+  (str: string, action: ContinueAllActionable) => {
+    action.stop();
+    return `Longer: ${str.length}`;
+  }
+);
+handler.subscribe(
+  (str: string) => str.length > 3,
+  (str: string) => {
+    return "This will not run";
+  }
+);
 
 const res = await handler.handle("abcd"); // Longer 4
-
 ```
+
 ### objectMapper
 
 `objectMapper` takes an expression and returns a value against a series of case clauses.
@@ -125,14 +134,19 @@ const grades = buildSwitch<number, string>()
   .then((g) => {
     throw new Error(`invalid grade ${g}`);
   })
-  .when(100).then("Ace") // special case :-)
-  .when((g) => g >= 90).then("A")
-  .when((g) => g >= 80).then("B")
-  .when((g) => g >= 70).then("C")
-  .when((g) => g >= 60).then("D")
+  .when(100)
+  .then("Ace") // special case :-)
+  .when((g) => g >= 90)
+  .then("A")
+  .when((g) => g >= 80)
+  .then("B")
+  .when((g) => g >= 70)
+  .then("C")
+  .when((g) => g >= 60)
+  .then("D")
   .default("F");
 
-const grade = grades.execute(95) // "A"
+const grade = grades.execute(95); // "A"
 ```
 
 ![switcher](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/switcher.gif?raw=true)

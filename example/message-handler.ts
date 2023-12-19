@@ -2,12 +2,12 @@ import { createMessageHandler } from "oz-branch-free";
 
 const handler = createMessageHandler<string>();
 
-const unsubsribeTooShort = handler.subscribe(
+const unsubscribeTooShort = handler.subscribe(
   (str) => str.length < 4,
   (str) => `'${str}' is too short`
 );
 
-const unsubsribeTooLong = handler.subscribe(
+const unsubscribeTooLong = handler.subscribe(
   (str) => str.length > 9,
   (str) => `'${str}' is too long`
 );
@@ -18,7 +18,7 @@ console.log(resShort); // output: 'abc' is too short
 const resLong = handler.handle("1234567890");
 console.log(resLong); // output: 'abc' is too long
 
-unsubsribeTooShort();
+unsubscribeTooShort();
 
 const resShortUnSubscribe = handler.handle("abc");
 console.log(resShortUnSubscribe); // output: undefined
