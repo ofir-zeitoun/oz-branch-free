@@ -4,13 +4,15 @@ Library with alternatives to hard coded switch-case and if-else blocks
 
 [`createMessageHandler`](#createmessagehandler)
 
+[`createMessageHandlerSync`](#createmessagehandlerSync)
+
 [`objectMapper`](#objectmapper)
 
 [`buildSwitch`](#buildSwitch)
 
 ### createMessageHandler
 
-`createMessageHandler` creates a handler so any subscriber can decide if it can and should handle the message arriving and return the a value accordingly.
+`createMessageHandler` creates an async handler so any subscriber can decide if it can and should handle the message arriving and return the a value accordingly.
 
 ```typescript
 import { createMessageHandler } from "oz-branch-free";
@@ -76,6 +78,10 @@ handler.subscribe(
 
 const res = await handler.handle("abcd"); // Longer 4
 ```
+### createMessageHandlerSync
+
+Synchronous version of [`createMessageHandler`](#createmessagehandler)
+
 
 ### objectMapper
 
