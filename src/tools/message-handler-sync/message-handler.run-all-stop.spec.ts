@@ -1,11 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
-import {
-  ContinueAllActionable,
-  createMessageHandler,
-} from "./message-handler-sync";
+import { ContinueAllActionable } from "../message-handler";
+import { createMessageHandlerSync } from "./message-handler-sync";
 
 describe("message-handler - run all - with stop", () => {
-  const handler = createMessageHandler<string>({ breakOnFirst: false });
+  const handler = createMessageHandlerSync<string>({ breakOnFirst: false });
 
   let unsubscribe1: () => void;
   let unsubscribe2: () => void;

@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
-import { createMessageHandler } from "./message-handler-sync";
+import { createMessageHandlerSync } from "./message-handler-sync";
 
 type TestType = Partial<{ a: number; b: boolean }>;
 describe("message-handler -Object break on first", () => {
-  const handler = createMessageHandler<TestType, string>();
+  const handler = createMessageHandlerSync<TestType, string>();
 
   let unsubscribe1: () => void;
   let unsubscribe2: () => void;

@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
-import { createMessageHandler } from "./message-handler-sync";
+import { createMessageHandlerSync } from "./message-handler-sync";
 
 describe("message-handler - types", () => {
   test("should have continue on default (break on first) handler", async () => {
-    const handler = createMessageHandler<string>();
+    const handler = createMessageHandlerSync<string>();
     handler.subscribe(
       (str) => str.length > 4,
       (str, action) => {
@@ -17,7 +17,7 @@ describe("message-handler - types", () => {
   });
 
   test("should have continue on break on first handler", async () => {
-    const handler = createMessageHandler<string>({ breakOnFirst: true });
+    const handler = createMessageHandlerSync<string>({ breakOnFirst: true });
     handler.subscribe(
       (str) => str.length > 4,
       (str, action) => {
@@ -31,7 +31,7 @@ describe("message-handler - types", () => {
   });
 
   test("should have stop on continueAll handler", async () => {
-    const handler = createMessageHandler<string>({ breakOnFirst: false });
+    const handler = createMessageHandlerSync<string>({ breakOnFirst: false });
     handler.subscribe(
       (str) => str.length > 4,
       (str, action) => {
