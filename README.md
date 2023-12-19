@@ -78,10 +78,10 @@ handler.subscribe(
 
 const res = await handler.handle("abcd"); // Longer 4
 ```
+
 ### createMessageHandlerSync
 
 Synchronous version of [`createMessageHandler`](#createmessagehandler)
-
 
 ### objectMapper
 
@@ -103,7 +103,7 @@ const mapper = objectMapper(
 );
 ```
 
-Now you have intelicense with types for existing properties:
+Now you have intellisense with types for existing properties:
 ![object-mapper with types](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/object-mapper.jpeg)?raw=true
 
 as well as for non existing properties:
