@@ -53,11 +53,11 @@ Constructor options:
 
 If `breakOnFirst` is `true` (default), the message handler stops once it find a match. The callback has action `next()` to override this behavior.
 
-Otherwise (`breakOnFirest` is `false`), the message handler continue for all subscribers. The callback has action `stop()` to override this behavior.
-![action can overide behavior](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/message-handler-continue-all.jpeg?raw=true)
+Otherwise (`breakOnFirst` is `false`), the message handler continue for all subscribers. The callback has action `stop()` to override this behavior.
+![action can override behavior](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/message-handler-continue-all.jpeg?raw=true)
 
 The next code shows that even if we init the message handler to run all (`breakOnFirst` is `false`), we can still stop it at the handler.
-![action can overide behavior](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/message-handler-break-on-first.jpeg?raw=true)
+![action can override behavior](https://github.com/ofir-zeitoun/oz-branch-free/blob/main/assets/images/message-handler-break-on-first.jpeg?raw=true)
 
 ```typescript
 const handler = createMessageHandler<string>({ breakOnFirst: false });
