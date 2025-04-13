@@ -16,6 +16,13 @@
   "files": [
     "lib"
   ],
+  "exports": {
+    ".": "./lib/index.js",
+    "./object-mapper": "./lib/tools/object-mapper/index.js",
+    "./message-handler": "./lib/tools/message-handler/index.js",
+    "./message-handler-sync": "./lib/tools/message-handler-sync/index.js",
+    "./switcher": "./lib/tools/switcher/index.js"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc  && vite build",

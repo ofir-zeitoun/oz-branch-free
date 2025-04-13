@@ -12,10 +12,18 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: "src/index.ts",
-      name: "oz-redux-dispatcher",
-      formats: ["es", "umd"],
-      fileName: "index",
+      entry: {
+        index: "src/index.ts",
+        "object-mapper": "src/tools/object-mapper/index.ts",
+        "message-handler": "src/tools/message-handler/index.ts",
+        "message-handler-sync": "src/tools/message-handler-sync/index.ts",
+        "switcher": "src/tools/switcher/index.ts"
+      },
+      name: "oz-branch-free",
+      formats: ["es"],
+      fileName: (format, entryName) => {
+        return entryName === 'index' ? 'index.js' : `tools/${entryName}/index.js`;
+      }
     },
     outDir: "lib",
     rollupOptions: {
