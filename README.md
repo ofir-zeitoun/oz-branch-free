@@ -15,7 +15,7 @@ Library with alternatives to hard coded switch-case and if-else blocks
 `createMessageHandler` creates an async handler so any subscriber can decide if it can and should handle the message arriving and return the a value accordingly.
 
 ```typescript
-import { createMessageHandler } from "oz-branch-free";
+import { createMessageHandler } from "oz-branch-free/message-handler";
 
 const handler = createMessageHandler<string>();
 
@@ -91,7 +91,7 @@ The default value will be returned if no case matches the expression's value.
 `objectMapper` is an alternative to [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) with `O(1)` access.
 
 ```typescript
-import { objectMapper } from "oz-branch-free";
+import { objectMapper } from "oz-branch-free/object-mapper";
 
 const mapper = objectMapper(
   {
@@ -133,6 +133,7 @@ After `when` must come `then`.<BR>
 After `default`, `execute` is the only option.
 
 ```typescript
+import { buildSwitch } from "oz-branch-free/switcher";
 // converts grades numbers to letters
 // order is important
 const grades = buildSwitch<number, string>()
